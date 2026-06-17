@@ -50,7 +50,7 @@ void BTreeIndex::remove(const std::string &key) {
 
 // Parte de busqueda
 
-int BTreeIndex::search(BTreeNode *node, const std::string &key) {
+int BTreeIndex::search(BTreeNode* node, const std::string& key) {
     int i = 0;
     while (i < (int)node->keys.size() && key > node->keys[i])
         i++;

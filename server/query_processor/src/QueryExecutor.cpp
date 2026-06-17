@@ -195,6 +195,17 @@ QueryResult QueryExecutor::executeInsert(const InsertStatement& stmt) {
 
 // la parte de update
 
+QueryResult QueryExecutor::executeUpdate(const UpdateStatement& stmt) {
+    QueryResult result;
+    StorageManager::getInstance().updateRecords(
+        currentDatabase, stmt.table,
+        stmt.setColumn, stmt.setValue,
+        stmt.whereColumn, stmt.whereValue, stmt.whereOp);
+    result.success = true;
+    return result;
+}
+
+// la parte de delete
 QueryResult QueryExecutor::executeDelete(const DeleteStatement& stmt) {
     QueryResult result;
     StorageManager::getInstance().deleteRecords(

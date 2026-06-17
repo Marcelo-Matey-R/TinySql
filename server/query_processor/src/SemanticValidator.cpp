@@ -93,6 +93,25 @@ void SemanticValidator::validateCreateIndex(
             "Index already exists on column: " + stmt.columnName);
 }
 
+void SemanticValidator::validateSelect(
+    const SelectStatement& stmt, const std::string& currentDb) {
+    requireDatabase(currentDb);
+    requireTableExists(currentDb, stmt.table);
+
+    if (stmt.columns.size() == 1 && stmt.columns[0] == "*") {
+        // SELECT * siempre es válido
+    } else {
+        for (auto& col : stmt.columns)
+            requireColumnExists(currentDb, stmt.table, col);
+    }
+
+    if (!stmt.whereColumn.empty())
+        requireColumnExists(currentDb, stmt.table, stmt.whereColumn);
+
+    if (!stmt.orderByColumn.empty())
+        requireColumnExists(currentDb, stmt.table, stmt.orderByColumn);
+}
+
 void SemanticValidator::validateInsert(
     const InsertStatement& stmt, const std::string& currentDb) {
     requireDatabase(currentDb);
