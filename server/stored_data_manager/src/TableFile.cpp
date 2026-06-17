@@ -169,7 +169,7 @@ std::vector<std::pair<std::vector<std::string>, int>> TableFile::scanWithOffsets
 void TableFile::writeRecord(std::ofstream& file,
                              const std::vector<std::string>& values,
                              const TableMeta& meta) {
-    // Flag de deleted = 0
+    // flag de deleted = 0
     char deleted = 0;
     file.write(&deleted, 1);
 
