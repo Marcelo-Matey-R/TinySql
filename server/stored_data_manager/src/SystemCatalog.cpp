@@ -3,6 +3,7 @@
 //
 
 #include "SystemCatalog.h"
+#include "PathUtils.h"
 #include <fstream>
 #include <filesystem>
 #include <stdexcept>
@@ -17,7 +18,7 @@ static const int MAX_COLUMNS = 32;
 
 // la parte del singleton
 SystemCatalog::SystemCatalog() {
-    catalogPath = "data/system_catalog/";
+    catalogPath = PathUtils::getExecutableDir() + "/data/system_catalog/";
     fs::create_directories(catalogPath);
 }
 

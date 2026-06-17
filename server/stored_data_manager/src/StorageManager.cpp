@@ -3,6 +3,7 @@
 //
 
 #include "StorageManager.h"
+#include "PathUtils.h"
 #include <filesystem>
 #include <iostream>
 #include <stdexcept>
@@ -12,7 +13,7 @@ namespace fs = std::filesystem;
 // La parte del singleton
 
 StorageManager::StorageManager() {
-    dataPath = "data/";
+    dataPath = PathUtils::getExecutableDir() + "/data/";
     fs::create_directories(dataPath + "system_catalog");
     loadIndexes();
 }
